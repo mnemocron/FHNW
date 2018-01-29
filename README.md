@@ -17,7 +17,7 @@
 
 licensed under the [Unlicense](https://unlicense.org/)
 
-Some references and links to other works belong to the respective owners.
+Some references and links to other works belong to their respective owners.
 
 
 ```
