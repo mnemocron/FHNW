@@ -10,6 +10,8 @@ format LONG;        % mehr Nachkommastellen
 format SHORT;
 hold ON;            % multiple Plots
 hold OFF;
+% Funktion plotten
+fplot(fx, [0,10])   % plottet von 0 bis 10
 % Achsen anschreiben
 xlabel('x');
 ylabel('y');
@@ -112,6 +114,7 @@ r = null(M, 'r')
 % Der Nullvektor ist folglich:
 r(1)*u + r(2)*v + r(3)*w      % muss [0 0 0]' geben
 
+% Diskretisierung
 % Lineare Abhängigkeit von Funktionen
 fx = @(x) (x+4).^2;
 gx = @(x) -(x+2).*(x+6)-4;
@@ -120,9 +123,72 @@ params=[-4 -2 4];
 M = [fx(params); gx(params); hx(params)];
 rref(M);       % zeigt, ob die Funktionen linear abhängig sind oder nicht
 % auch hier könnte null(M, 'r') angewendet werden
+% Orthogonal-Basis:
+% stehen zwei Vektoren senkrecht zueinander, so ist deren Skalarprodukt = 0
+M'*M
 
-% Funktion plotten
-fplot(fx, [0,10])   % plottet von 0 bis 10
+% Interpolation
+% Gegeben: - Funktionen
+%          - Stellen (x)
+%          - Funktionswerte (y)
+stellen = [5 6 7 8]';
+werte = [0, 22, -44, -198]';
+f1 = @(x) (x-8).*(x-7).*(x-6);
+f2 = @(x) (x-8).*(x-7).*(x-5);
+f3 = @(x) (x-8).*(x-6).*(x-5);
+f4 = @(x) (x-7).*(x-6).*(x-5);
+% diskretisieren mit den Funktionen als Spalte und Stellen als Zeile
+dis=[f1(stellen) f2(stellen) f3(stellen) f4(stellen)];
+% Parameter a1 = dot(y, f1)/(norm(f1)^2)
+a1 = dot(werte, dis(:,1))/(norm(dis(:,1))^2)
+a2 = dot(werte, dis(:,2))/(norm(dis(:,2))^2)
+a3 = dot(werte, dis(:,3))/(norm(dis(:,3))^2)
+a4 = dot(werte, dis(:,4))/(norm(dis(:,4))^2)
+% so heisst die Interpolation:
+% f(x) = a1*f1 + a2*f2 + a3*f3 + a4*f4
+
+% Diskretisierung / Interpolation
+stellen=[0 5/4 5/2 15/4 5 25/4 15/2 35/4]';
+werte=[0 105 150 165 168 165 150 105]';
+f1=@(x) ((x./5)-1).^0;
+f2=@(x) ((x./5)-1).^1;
+f3=@(x) ((x./5)-1).^2;
+f4=@(x) ((x./5)-1).^3;
+f5=@(x) ((x./5)-1).^4;
+f6=@(x) ((x./5)-1).^5;
+f7=@(x) ((x./5)-1).^6;
+f8=@(x) ((x./5)-1).^7;
+dis=[f1(stellen) f2(stellen) f3(stellen) f4(stellen) f5(stellen) f6(stellen) f7(stellen) f8(stellen)]
+%  Orthogonalität Prüfen
+dis'*dis        % keine senkrechte Orthogonalität ( = 0)
+% Interpolation
+aa=inv(dis)*werte;
+ff=@(x) aa(1).*f1(x) + aa(2).*f2(x) + aa(3).*f3(x) + aa(4).*f4(x) + aa(5).*f5(x) + aa(6).*f6(x) + aa(7).*f7(x) + aa(8).*f8(x);
+
+
+% Orthogonalbasistransformation:
+% Vektor s zur neuen Basis F
+% s1f = dot(f1./(norm(f1)^2), s)
+s = [1 11 -2]';
+f1 = [2 1 2]';
+f2 = [-2 2 1]';
+f3 = [1 2 -2]';
+s1f = dot(f1./(norm(f1)^2), s);
+s2f = dot(f2./(norm(f2)^2), s);
+s3f = dot(f3./(norm(f3)^2), s);
+sf = [s1f s2f s3f]'
+
+% Basistransformation
+f1 = [3/5 -4/5]';     % Basisvektoren (vorzugsweise normiert)
+f2 = [4/5 3/5]';
+F = [f1 f2];          % Basis-Matrix
+A = [12 -1]';         % Vektor A
+% mit Projektion:
+a1f = dot(A, f1./(norm(f1)^2));
+a2f = dot(A, f2./(norm(f2)^2));
+Af = [a1f; a2f]
+% mit Basis-Matrix:
+Af = inv(F)*A
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -261,7 +327,6 @@ M*inv(M)  % muss Diagonale 1-en ergeben
 det(M)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Abbildungen mit Matrix
 
 % Test: ist die Abbildung linear?
@@ -288,15 +353,42 @@ e2s = [-sin(phi); cos(phi)];
 R = [e1s e2s];
 R = [cos(phi) -sin(phi); sin(phi) cos(phi)];
 
-% Test: Linearität der Matrix
-% Homogenität: L(lam*v) = lam*L(v)
-% Additivität: L(v+w) = L(v)+L(w)
-% @todo:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ebenengleichungen
+P = [2 1 -3]';
+Q = [3 0 2]';
+R = [2 2 1]';
 
+% Parameterform:
+% E:x = OP + r*PQ + s*PR
+% P + lam*(Q-P) + phi*(R-P)
+PQ = Q-P;
+PR = R-P;
 
+% Normalenform
+% A: Aufpunkt / x: Punkt der auf der Ebene liegt / n: Normale
+% E: (x-A)*n
+% (x-P)*n
+n = cross(PQ, PR);
+
+% Koordinatenform
+% a*x + b*y + c*z = d
+a = n(1);
+b = n(2);
+c = n(3);
+d = abs( P(1)*n(1) + P(2)*n(2) + P(3)*n(3) );
+
+% Hessesche Normalform
+% x: Punkt auf Ebene / |n|: normierte Normale / d: Abstand zum Ursprung
+% x*|n| = d
+
+% Achsenabschnittsform
+% x/x0 + y/y0 + z/z0 = 1
+x0 = d/a;
+y0 = d/b;
+z0 = d/c;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 % Weitere Hinweise
 % (CTRL + F)
 
@@ -324,5 +416,4 @@ eye(4,8)
 x=1:10      % 1 bis 10
 x=1:2:10    % 1 bis 10 im Abstand von 2
 x=linspace(1,10,5)  % von 1 bis 10 mit 5 Elementen
-
 
