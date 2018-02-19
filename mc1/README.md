@@ -30,4 +30,9 @@ $ sudo apt-get install autoconf automake
 
 [instructables](www.instructables.com/id/Command-Line-Assembly-Language-Programming-for-Ard/)
 
+
+### Arduino IDE
+
+Die Arduino IDE kann ebenfalls Assembler code kompilieren - ist jedoch etwas umständlich. Dies wendet zB. die Adafruit NeoPixel Library an um den zeitkritischen (Synchron-) Bitstream an die LEDs zu senden.
+
 ---
