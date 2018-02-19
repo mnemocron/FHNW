@@ -4,12 +4,17 @@
 
 ### Lineare Algebra 1 (lalg1)
 
-- MATLAB Script für die Modulschlussprüfung (WIP)
-
+- MATLAB Script für die Modulschlussprüfung
+- MATLAB Script der MSP HS17 (Februar 2018)
 
 ### Algemeine Elektrotechnik (aet1)
 
 - MATLAB Beispiele zur Bestimmung des Mittel- & Effektivwerts
+
+### Microcontroller 1 (mc1)
+
+- Installationshinweise für `avra` / `avrdude`
+- Assembly (`.asm`) source code für die Aufgaben
 
 ---
 
