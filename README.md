@@ -16,6 +16,10 @@
 - Installationshinweise für `avra` / `avrdude`
 - Assembly (`.asm`) source code für die Aufgaben
 
+### Grundlagenlabor 2 (glaL2)
+
+- MATLAB Aufgaben
+
 ---
 
 ### License
