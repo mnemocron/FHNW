@@ -33,9 +33,9 @@ public class SwingFrame {
             @Override
             public double f(double x, double y) {
                 // return x * y;
-            	//return x * Math.sin(x * y);
+            	return x * Math.sin(x * y);
             	// return Math.sin(Math.sin(y))*(Math.cos((Math.PI/2)*Math.cos(x)*Math.cos(y)))/(Math.sqrt(1-Math.pow(Math.cos(x),2)*Math.pow(Math.cos(y),2)));
-            	return Math.exp(-0.5*Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*Math.cos(5*Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+            	// return Math.exp(-0.5*Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)))*Math.cos(5*Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
             	
             	/*
             	double l_lamda1=1/100; // length of antenna in terms of wavelengths
