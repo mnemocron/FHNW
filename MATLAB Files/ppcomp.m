@@ -25,6 +25,6 @@ function [ans] = ppcomp(varargin)
         title = 'Comp';
     end
     
-    ans = strcat(title, " = ", num2str(abs(varargin{1})), " ", unit, " cis( ", num2str(rad2deg(angle(varargin{1}))), "° )")
+    ans = strcat(title, " = ", num2str(abs(varargin{1})), " ", unit, " cis( ", num2str(rad2deg(angle(varargin{1}))), "Â° )");
 end
 
