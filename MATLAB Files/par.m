@@ -8,5 +8,6 @@ function [R] = par(varargin)
 %       Z2 = 3-j*4;
 %       Zp = par(Z1, Z2);
 %
+%   Copyright 2018 S. Gaulocher
 
 R = 1/sum(1./cell2mat(varargin));
