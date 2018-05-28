@@ -3,9 +3,6 @@
  *
  * Created: 14.05.2018 13:37:47
  * Author : simon
- * 
- * ALPS EC12D1564404 Inkrementaler Drehgeber, isolierte 
- * Welle, 12mm, vertikal, 30 Rastungen, 15 Impulse
  */ 
 
 #include <avr/io.h>
