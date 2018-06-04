@@ -1,8 +1,9 @@
-function [ans] = dreieck2stern(R1, R2, R3)
+function [ans] = dreieck2stern(Rab, Rac, Rbc, display)
 
-Ra = (R1*R3)/(R1+R2+R3);
-Rb = (R1*R2)/(R1+R2+R3);
-Rc = (R2*R3)/(R1+R2+R3);
+Rtot = (Rac+Rab+Rbc);
+Ra = (Rac*Rab)/Rtot;
+Rb = (Rab*Rbc)/Rtot;
+Rc = (Rac*Rbc)/Rtot;
 
 
 %%
@@ -23,9 +24,9 @@ if (display == true)
 	l=line([2.5 7.5], [2 2]); l.LineWidth = 3;
 	l=line([5 5], [0 2]); l.LineWidth = 3;
 	
-	text(3, 7, strcat('R1 = ', num2str(R1), '\Omega'));
-	text(0.3, 1, strcat('R2 = ', num2str(R2), '\Omega'));
-	text(5.3, 1, strcat('R3 = ', num2str(R3), '\Omega'));
+	text(3, 7, strcat('R_{ab} = ', num2str(Rab), '\Omega'));
+	text(0.3, 1, strcat('R_{ac} = ', num2str(Rac), '\Omega'));
+	text(5.3, 1, strcat('R_{bc} = ', num2str(Rbc), '\Omega'));
 	
 	axis([0 10 0 10]);
 end
@@ -49,9 +50,9 @@ if(display == true)
 	l=line([5 5], [6.25 4]); l.LineWidth = 3;
 	l=line([5 5], [0 3]); l.LineWidth = 3;
 	
-	text(1, 7, strcat('RA = ', num2str(Ra), '\Omega'));
-	text(6, 7, strcat('RB = ', num2str(Rb), '\Omega'));
-	text(6, 3, strcat('RC = ', num2str(Rc), '\Omega'));
+	text(1, 7, strcat('R_a = ', num2str(Ra), '\Omega'));
+	text(6, 7, strcat('R_b = ', num2str(Rb), '\Omega'));
+	text(6, 3, strcat('R_c = ', num2str(Rc), '\Omega'));
 	axis([0 10 0 10])
 end
 end
