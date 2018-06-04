@@ -111,11 +111,11 @@ state_func_t* const state_table[ N_States ] = {
 };
 
 /* State Machine asuführen */
-/*
+
 state_t run_state(state_t state_now){
-	return state_table[ state_now ];    // Pointer conversation Error
+	return state_table[ state_now ]();    // Pointer conversation Error
 };
-*/
+
 state_t run_state_machine(state_t state_now){
 	switch(state_now){
 		case S_Aus:
@@ -148,7 +148,8 @@ int main(void)
 	
     while (1) {
 		// state = run_state(state);      // Funktioniert nicht
-		state = run_state_machine(state);
+		// state = run_state_machine(state);
+		state = run_state(state);
 		_delay_ms(100);
     }
 }
