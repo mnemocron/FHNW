@@ -5,6 +5,7 @@
 % \date        : 16.04.2018
 % \version     : 1.0
 %******************************************************************************
+% DREIECKSCHALTUNG symmetrische Last, U12 gegeben
 
 clear all; clc
 

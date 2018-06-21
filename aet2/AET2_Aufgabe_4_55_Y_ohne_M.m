@@ -5,7 +5,7 @@
 % \date        : 21.04.2018
 % \version     : 1.0
 %******************************************************************************
-% STERNSCHALTUNG OHNE MITTELPUNKTSLEITER
+% Y-STERNSCHALTUNG OHNE MITTELPUNKTSLEITER
 %******************************************************************************
 
 clear all; clc

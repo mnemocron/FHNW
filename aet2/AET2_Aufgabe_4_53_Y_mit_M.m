@@ -5,6 +5,7 @@
 % \date        : 16.04.2018
 % \version     : 1.0
 %******************************************************************************
+% Y-STERNSCHALTUNG MIT MITTELPUNKTLEITER
 
 clear all; clc
 
