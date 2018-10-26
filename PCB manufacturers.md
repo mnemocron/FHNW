@@ -1,5 +1,5 @@
 
-- [JLC PCB[(https://jlcpcb.com/)
+- [JLC PCB](https://jlcpcb.com/)
 - [Elecrow](https://www.elecrow.com/pcb-manufacturing.html)
 - [DirtyPCBs](http://dirtypcbs.com/store/pcbs)
 - [Aisler](https://aisler.net/products/boards)
