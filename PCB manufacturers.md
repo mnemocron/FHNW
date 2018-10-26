@@ -1,7 +1,7 @@
 
-- [DirtyPCBs](http://dirtypcbs.com/store/pcbs)
+- [JLC PCB[(https://jlcpcb.com/)
 - [Elecrow](https://www.elecrow.com/pcb-manufacturing.html)
-- [JLCPCB](https://jlcpcb.com/quote)
+- [DirtyPCBs](http://dirtypcbs.com/store/pcbs)
 - [Aisler](https://aisler.net/products/boards)
 - [PCBCart](https://www.pcbcart.com/)
 - [OSH Park](https://oshpark.com/)
