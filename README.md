@@ -7,9 +7,16 @@
 - MATLAB Script für die Modulschlussprüfung
 - MATLAB Script der MSP HS17 (Februar 2018)
 
-### Algemeine Elektrotechnik (aet1)
+### Algemeine Elektrotechnik 1 (aet1)
 
 - MATLAB Beispiele zur Bestimmung des Mittel- & Effektivwerts
+
+### Algemeine Elektrotechnik 2 (aet2)
+
+- MATLAB Lösungen zu den Übungsaufgaben
+- MATLAB Lösungen zu alten Prüfungen
+
+(Aufgaben sind nicht immer korrekt gelöst!)
 
 ### Microcontroller 1 (mc1)
 
@@ -19,6 +26,20 @@
 ### Grundlagenlabor 2 (glaL2)
 
 - MATLAB Aufgaben
+
+### Analysis 2 (an2)
+
+- diverse Geogebra Visualisierungen
+
+### Analysis 3 (an3E)
+
+- MATLAB Lösungen zu diversen Übungsserien
+
+### Analogtechnik (ant)
+
+- Simulationsfiles für das Simulationsprojekt (U- & I-Messung mit Tiefpass 4. Grades)
+- LTSpice Cheatsheet mit wichtigen Tricks
+- MATLAB File zur Dimensionierung von Filterkoeffizienten
 
 ---
 
