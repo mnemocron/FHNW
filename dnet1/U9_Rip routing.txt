@@ -1,0 +1,74 @@
+R1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#ip route 0.0.0.0 0.0.0.0 Se0/1/0
+R1(config)#router rip
+R1(config-router)#version 2
+R1(config-router)#no auto-summary
+R1(config-router)#network 172.30.1.0
+R1(config-router)#network 172.30.2.0
+R1(config-router)#network 192.168.4.12
+R1(config-router)#network 87.87.87.16
+R1(config-router)#passive-interface Se0/1/0
+R1(config-router)#exit
+R1(config)#exit
+
+R1(config)#ipv6 unicast-routing
+R1(config)#ipv6 route ::/0 Se0/1/0
+R1(config-if)#int Ser0/0/0
+R1(config-if)#ipv6 rip RIP-AS enable
+R1(config-if)#ipv6 rip RIP-AS default-information originate
+R1(config-if)#int Ser0/0/1
+R1(config-if)#ipv6 rip RIP-AS enable
+R1(config-if)#ipv6 rip RIP-AS default-information originate
+R1(config-if)#int Ser0/1/0
+R1(config-if)#ipv6 rip RIP-AS enable
+
+
+R2#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R2(config)#router rip
+R2(config-router)#version 2
+R2(config-router)#no auto-summary
+R2(config-router)#network 172.30.3.0
+R2(config-router)#network 172.30.2.0
+R2(config-router)#network 192.168.4.8
+-->  R2(config-router)#default-information originate <-- NEIN!
+R2(config-router)#exit
+
+R2(config)#ipv6 unicast-routing
+R2(config)#int Se0/0/0
+R2(config-if)#ipv6 rip RIP-AS enable
+R2(config-if)#int Ser0/0/1
+R2(config-if)#ipv6 rip RIP-AS enable
+
+
+R3#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+R3(config)#router rip
+R3(config-router)#version 2
+R3(config-router)#no auto-summary
+R3(config-router)#network 192.168.5.0
+R3(config-router)#network 192.168.4.12
+R3(config-router)#network 192.168.4.8
+-->  R3(config-router)#default-information originate <-- NEIN!
+R3(config-router)#exit
+
+R3(config)#ipv6 unicast-routing 
+R3(config)#int Se0/0/1
+R3(config-if)#ipv6 rip RIP-AS enable
+R3(config-if)#int Se0/0/0
+R3(config-if)#ipv6 rip RIP-AS enable
+
+ISP#conf t
+ISP(config)#int loopback 0
+ISP(config-if)#ip addr 187.187.187.1 255.255.255.252
+ISP(config-if)#ipv6 addr 2001:db8:c:1::/64
+
+
+
+
+
+
+
+
+

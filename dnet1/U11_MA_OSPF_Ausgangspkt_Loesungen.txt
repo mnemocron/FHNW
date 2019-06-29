@@ -1,0 +1,17 @@
+
+
+
+
+b) Analyse: Was ist bereits konfiguriert? Was fehlt? Überlegen Sie für jeden Router, was seine Funktion innerhalb von OSPF ist (2. Spalte der Tabelle). Um was für Netztypen handelt es sich (4. Spalte)?
+
+Vorhanden:
+- dhcp pools ?
+- IPv4 Adressen
+
+Fehlend
+- ospf
+- IPv6 Adressen (ZH_O, ZH_Prod, Dreispitz)
+- teilweise client default gateways
+
+
+

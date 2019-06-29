@@ -1,0 +1,33 @@
+ZH_Office
+network 192.168.10.0  0.0.1.255 area 10
+network 192.168.12.0  0.0.1.255 area 10
+
+
+# link state database
+show ip ospf database ?
+
+Router Link States (Area 10) = LSA Typ 1
+- Zürich .15
+- Zürich Prod .11
+- Zürich Office .10
+
+Net Link States (Area 10) = LSA Typ 2 (multiaccess)
+ADV Router = Source
+- DR LSA, alle Router bekommen dieses LSA
+
+Summary Net Link States (Area 10) = Typ 3 = kommt aus einer anderen Area
+
+
+Summary ABS = Typ 4
+- ASBR
+
+LSA Typ 5 = externe Netze
+- default Route
+
+
+# wer ist designated Router ?
+show ip ospf in g0/0
+
+# in stub networks gibt es keine DR
+# nur in multiaccess networks mit nachbarschaften
+

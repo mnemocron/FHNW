@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE qti>
+<qti app="QtiPlot" version="0.9.9.2" dpi="144" arch="Win64" script="muParser" windows="2" expand="1">
+	<window type="1" name="Tabelle1" date="2458594.3739989" x="0" y="0" w="546" h="537">
+		<tab rows="30" cols="3" labels="0">
+			<col name="Br" type="6" num="0" prec="13" plot="2" width="100" stat="0" data="0.13892675364344;0.13708217966639;0.14174858806695;"/>
+			<col name="s" type="6" num="0" prec="13" plot="5" width="100" stat="0" data="0.0017672000927637;0.002448622435026;0.00065693874488033;"/>
+			<col name="1" type="6" num="0" prec="13" plot="1" width="100" stat="0" data="1;2;3;"/>
+		</tab>
+	</window>
+	<window type="3" name="Grafik1" date="2458594.3772733" x="546" y="0" w="1074" h="951" active="1" dpi="144">
+		<layout cw="1060" ch="879" w="400" h="300" left="5" right="5" top="5" bottom="5" rows="1" cols="1" vSpace="5" hSpace="5" hAlign="0" vAlign="0" align="0" common="0" link="0" scale="1" sPrint="0" cmPrint="0" atUnits="1" atdIndex="0" atPolicy="4" alMode="0" luMode="2"/>
+		<tab x="43" y="90" w="732" h="628" autoscale="1" gap="1" scaleFont="1">
+			<page x="0.040566" y="0.102389" w="0.690566" h="0.714448"/>
+			<title text="Vergleich der Feldstärken der 3 Magnete" color="#000000" font="Lucida Sans Unicode,12.8112,-1,5,75,0,0,0,0,0" align="4" fmw="545"/>
+			<frame bg="#ffffff,0"/>
+			<canvas x="148" y="138" w="621" h="470" fixRatio="1.33333" bg="#ffffff,0"/>
+			<grid xAxis="2" yAxis="0">
+				<majx lc="#a0a0a4" lw="1" ls="0"/>
+				<minx lc="#a0a0a4" lw="1" ls="0"/>
+				<majy lc="#a0a0a4" lw="1" ls="0"/>
+				<miny lc="#a0a0a4" lw="1" ls="0"/>
+			</grid>
+			<curve type="1" z="22" table="Tabelle1" x="1" y="Br" from="0" to="-1" line="0" lc="#000000" lw="1" ls="0" brc="#000000" brs="0">
+				<symbol style="1" size="11" lc="#000000" lw="1" ls="0" brc="#000000"/>
+				<errors type="1" z="21" table="Tabelle1" col="s" from="0" to="-1" lw="2" lc="#ff0000" cap="8" plus="1" minus="1" symb="1"/>
+			</curve>
+			<axis id="0" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="0.134" to="0.143" step="0" maj="10" min="5" type="0"/>
+				<ticks maj="1" majl="17" min="1" minl="9"/>
+				<title text="[%(?Y)] T" color="#000000" font="Lucida Sans Unicode,10,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="89"/>
+				<labels space="4" font="Lucida Sans Unicode,10,-1,5,50,0,0,0,0,0"/>
+			</axis>
+			<axis id="1" on="0" type="0" format="0" prec="6" lw="1">
+				<div from="-2000000" to="2000000" step="0" maj="9" min="5" type="0"/>
+				<ticks maj="1" majl="17" min="1" minl="9"/>
+				<title text="%(?Y)" color="#000000" font="Lucida Sans Unicode,14.4418,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="72"/>
+				<labels space="4" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0"/>
+			</axis>
+			<axis id="2" on="1" type="0" format="0" prec="6" lw="1">
+				<div from="0.5" to="3.5" step="0" maj="4" min="0" type="0"/>
+				<ticks maj="1" majl="17" min="1" minl="9"/>
+				<title text="`&#10;Versuchsnummer" color="#000000" font="Lucida Sans Unicode,10,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="210"/>
+				<labels space="4" font="Lucida Sans Unicode,10,-1,5,50,0,0,0,0,0"/>
+			</axis>
+			<axis id="3" on="0" type="0" format="0" prec="6" lw="1">
+				<div from="0.5" to="4.5" step="0" maj="9" min="5" type="0"/>
+				<ticks maj="1" majl="17" min="1" minl="9"/>
+				<title text="%(?X)" color="#000000" font="Lucida Sans Unicode,14.4418,-1,5,75,0,0,0,0,0" align="5124" space="2" fmw="72"/>
+				<labels space="4" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0"/>
+			</axis>
+			<item type="2" x="3.0625" y="0.135454794520548" frame="1" lc="#000000" lw="1" ls="0" bg="#ffffff,0" brc="#000000" brs="0" onTop="1" at="0" on="1" auto="1" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0" text="\l(1)%(1)"/>
+			<item type="2" x="0.65" y="0.142087671232877" frame="1" lc="#000000" lw="1" ls="0" bg="#ffffff,0" brc="#000000" brs="0" onTop="1" at="0" on="1" auto="1" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0" text="6x13 (1)"/>
+			<item type="2" x="1.75625" y="0.14206301369863" frame="1" lc="#000000" lw="1" ls="0" bg="#ffffff,0" brc="#000000" brs="0" onTop="1" at="0" on="1" auto="1" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0" text="8x15"/>
+			<item type="2" x="2.65625" y="0.140756164383562" frame="1" lc="#000000" lw="1" ls="0" bg="#ffffff,0" brc="#000000" brs="0" onTop="1" at="0" on="1" auto="1" font="Lucida Sans Unicode,14.4418,-1,5,50,0,0,0,0,0" text="6x16 (3)"/>
+		</tab>
+	</window>
+</qti>

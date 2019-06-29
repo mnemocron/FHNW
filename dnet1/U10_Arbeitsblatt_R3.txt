@@ -1,0 +1,109 @@
+Building configuration...
+
+Current configuration : 1300 bytes
+!
+version 15.1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R3
+!
+!
+!
+enable password class
+!
+!
+!
+!
+!
+!
+no ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+!
+license udi pid CISCO1941/K9 sn FTX1524Y6ZR-
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain-lookup
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface GigabitEthernet0/1
+ ip address 192.168.1.1 255.255.255.0
+ duplex auto
+ speed auto
+ ipv6 address FE80::1 link-local
+ ipv6 address 2001:DB8:CAFE:3::1/64
+!
+interface Serial0/0/0
+ bandwidth 1000
+ ip address 192.168.10.6 255.255.255.252
+ ipv6 address FE80::2 link-local
+ ipv6 address 2001:DB8:CAFE:A003::2/64
+!
+interface Serial0/0/1
+ bandwidth 64
+ ip address 192.168.10.10 255.255.255.252
+ ipv6 address FE80::2 link-local
+ ipv6 address 2001:DB8:CAFE:A002::2/64
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 192.168.1.3
+ log-adjacency-changes
+ network 192.168.1.0 0.0.0.255 area 1
+ network 192.168.10.4 0.0.0.3 area 1
+ network 192.168.10.8 0.0.0.3 area 1
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ password cisco
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password cisco
+ login
+ transport input telnet
+!
+!
+!
+end
