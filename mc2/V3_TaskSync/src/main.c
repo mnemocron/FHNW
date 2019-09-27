@@ -6,6 +6,13 @@
   ******************************************************************************
 */
 
+/**
+ * Hausaufgabe V3
+ *
+ * Unklar ob korrekt gelöst, da die semaphore_take_errors Variable nicht inkrementiert wird
+ * dies selbst bei hoher Updaterate der Tasks (1ms delay).
+ */
+
 #include <stdio.h>
 #include "stm32f4xx.h"
 #include "stm32f429i_discovery.h"
@@ -13,28 +20,18 @@
 #include "lcd_log.h"
 #include "FreeRTOS.h"
 #include "task.h"
-//#include "queue.h"
-//#include "semphr.h"
-
-#define INCLUDE_uxTaskGetStackHighWaterMark
+#include "queue.h"
+#include "semphr.h"
 
 #define LD3_GREEN GPIO_PIN_13
 #define LD4_RED GPIO_PIN_14
 #define LD_GPIO_PORT GPIOG
 
-/* OpenOCD supports GDB task context display with FreeRTOS by adding config option "$_TARGETNAME configure -rtos auto"
- * When using SW4STM32 this could be done by setting the "Debug Configuration" to a "user defined" OpenOCD config script,
- * then appending "$_TARGETNAME configure -rtos auto" at the end of the (previously) auto-generated config script (*.cfg).
- * Now OpenOCD expects a variable 'xTopReadyPriority' which unfortunately was removed in newer FreeRTOS releases,
- * but the variable might easily be addeding following variable:
- *   const int __attribute__((used)) uxTopUsedPriority = configMAX_PRIORITIES-1;
- * But by doing this, unfortunately OpenOCD no more allows breakpoints before FreeRTOS is running, so the initial
- * breakpoint at entry of 'main()' has to be disabled in the "Debug Configuration", otherwise the debugger hangs forever!
- */
-
 static void CounterTask(void *pvParameters);
 static void HeartbeatTask(void *pvParameters);
 static void WorkerTask(void *pvParameters);
+
+SemaphoreHandle_t LCDSemaphore;
 
 int main(void)
 {
@@ -42,6 +39,10 @@ int main(void)
     SystemClockConfig();
     HAL_Init();
 	lcd_init();
+
+	// https://www.freertos.org/xSemaphoreCreateBinary.html
+    LCDSemaphore = xSemaphoreCreateBinary(); // vor dem Starten des Schedulers
+    xSemaphoreGive(LCDSemaphore);
 
     BSP_LED_Init(LED3);
     BSP_LED_Init(LED4);
@@ -58,13 +59,21 @@ int main(void)
 
 static void WorkerTask(__attribute__ ((unused)) void *pvParameters)
 {
-
 	while (1) {
-		char text[30];
-		snprintf(text, sizeof(text), "Hello from Worker Task!");
-		BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
-		BSP_LCD_DisplayStringAt(0, 10, (uint8_t*) text, LEFT_MODE);
-		vTaskDelay(1000);
+		if(LCDSemaphore != NULL){
+			// ask for permission to write to LCD
+			if(xSemaphoreTake(LCDSemaphore, (TickType_t)10) == pdTRUE ){
+				char text[30];
+				snprintf(text, sizeof(text), "Hello from Worker Task!");
+				BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+				BSP_LCD_DisplayStringAt(0, 10, (uint8_t*) text, LEFT_MODE);
+
+				xSemaphoreGive(LCDSemaphore); // done using LCD resource
+			} else {
+				// LCD resource is busy
+			}
+			vTaskDelay(1);
+		}
 	}
 }
 
@@ -92,20 +101,33 @@ static void CounterTask(__attribute__ ((unused)) void *pvParameters)
 	uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
 
 	int n=0;
+	int semaphore_take_errors = 0;
 
 	while (1) {
-		char text[20];
-		HAL_GPIO_TogglePin(LD_GPIO_PORT, LD3_GREEN);
-		vTaskDelay(500);
-		snprintf(text, sizeof(text), "Counter = %d", n++);
-		BSP_LCD_SetTextColor(LCD_COLOR_MAGENTA);
-		BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2, (uint8_t*) text, CENTER_MODE);
+		if(LCDSemaphore != NULL){
+			// ask for permission to write to LCD
+			if(xSemaphoreTake(LCDSemaphore, (TickType_t)10) == pdTRUE ){
+				char text[20];
+				snprintf(text, sizeof(text), "Counter = %d", n++);
+				BSP_LCD_SetTextColor(LCD_COLOR_RED);
+				BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2, (uint8_t*) text, CENTER_MODE);
 
-		snprintf(text, sizeof(text), "                 ");
-		BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2 + 20, (uint8_t*) text, CENTER_MODE);
-		snprintf(text, sizeof(text), "Free = %d bytes", (int)uxHighWaterMark*4 );
-		BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2 + 20, (uint8_t*) text, CENTER_MODE);
-		uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+				snprintf(text, sizeof(text), "                 ");
+				BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2 + 20, (uint8_t*) text, CENTER_MODE);
+				snprintf(text, sizeof(text), "Free = %d bytes", (int)uxHighWaterMark*4 );
+				BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2 + 20, (uint8_t*) text, CENTER_MODE);
+				snprintf(text, sizeof(text), "SemErr = %d", semaphore_take_errors );
+				BSP_LCD_DisplayStringAt(0,BSP_LCD_GetYSize() / 2 + 40, (uint8_t*) text, CENTER_MODE);
+
+				uxHighWaterMark = uxTaskGetStackHighWaterMark( NULL );
+				xSemaphoreGive(LCDSemaphore); // done using LCD resource
+			} else {
+				// LCD resource is busy
+				semaphore_take_errors++;
+			}
+			HAL_GPIO_TogglePin(LD_GPIO_PORT, LD3_GREEN);
+			vTaskDelay(1);  // short delay to provoke errors
+		}
 	}
 }
 
