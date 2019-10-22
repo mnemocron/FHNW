@@ -11,10 +11,6 @@ SemaphoreHandle_t UartSemaphore;
 
 void rb_put(char ch)
 {
-	ringbuf.buf[ringbuf.put_ix] = ch;
-	ringbuf.put_ix = (ringbuf.put_ix +1) % (sizeof(ringbuf.buf)/sizeof(char));
-	ringbuf.n = ringbuf.n +1;
-
 	if(ch == '\r'){
 		portBASE_TYPE higherPriorityTaskWoken = pdFALSE;
 		if (UartSemaphore != NULL)
@@ -25,6 +21,11 @@ void rb_put(char ch)
 		https://www.freertos.org/a00124.html */
 		portYIELD_FROM_ISR( higherPriorityTaskWoken );  // YEET!
 		/* This also reduces the latency from ISR to IST from <1ms to ~10us	 */
+	} else {
+		// we only want non <cr> charaters in the string
+		ringbuf.buf[ringbuf.put_ix] = ch;
+		ringbuf.put_ix = (ringbuf.put_ix +1) % (sizeof(ringbuf.buf)/sizeof(char));
+		ringbuf.n = ringbuf.n +1;
 	}
 }
 
