@@ -1,0 +1,25 @@
+
+obj-m=mod_exam.o
+
+#KERNEL_SRC=/lib/modules/$(shell uname -r)/build
+KERNEL_SRC=../../linux-stable
+
+APP=mod_exam
+
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-gnueabihf-
+
+all:
+	make -C $(KERNEL_SRC) M=$(PWD) modules
+	rm -rf *.o *.mod.c modules.order Module.symvers
+
+clean:
+	make -C $(KERNEL_SRC) M=$(PWD) clean
+
+.PHONY: install
+install:
+	scp ./$(APP).ko root@192.168.254.254:/tmp/
+
+
+
+

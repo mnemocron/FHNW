@@ -2,6 +2,22 @@
 
 ---
 
+## Nützliches fürs Studium
+
+### PCB manufacturers.md
+
+Günstige (u.a.) PCB Hersteller für Prototypen. Nicht abschliessend.
+
+### budget.xlsx
+
+Berechnungstool für Budgegrundlage. Jeden Monat Kontostand eintragen und überprüfen, ob man auf Kurs liegt. 
+Eine Auswahl von Einkommensquellen und Ausgabekategorien sind bereits vorhanden und können gelöscht / erweitert werden.
+**Disclaimer** Die Daten sind selbstverständlich frei erfunden.
+
+---
+
+## Module 
+
 ### Lineare Algebra 1 (lalg1)
 
 - MATLAB Script für die Modulschlussprüfung
