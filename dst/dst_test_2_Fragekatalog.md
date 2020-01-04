@@ -29,7 +29,7 @@ Dadurch muss sich der Entwickler nicht um Low-Level kümmern.
 d) Wozu wird der Nios II Core gerne eingesetzt, wenn auf dem gleichen FPGA auch ein ARM Prozessoren verfügbar ist? 
 
 > der ARM Prozessor kann User Interfaces oder sogar ein Embedded Linux laufen lassen.
-> Daher kann der Nios 2 für real-time Aufgaben eingesetzt werden.
+> Daher kann der Nios 2 für real-time Aufgaben eingesetzt werden. Der Nios 2 ist **deterministisch** im vergleich zum ARM.
 
 e) Der Nios II Core selber hat kein Tristate Conduit Interface. Begründen Sie, wieso nicht? 
 
