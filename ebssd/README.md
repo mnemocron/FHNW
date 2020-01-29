@@ -2,6 +2,7 @@
 
 ---
 
-C Source Code für die Versuche auf dem Wandboard.
+- C Source Code für die Versuche auf dem Wandboard.
+- Kurzprüfungen auf infboard
 
 
